@@ -5,17 +5,19 @@ import java.util.ArrayList;
 public class Java_Exam {
 
     public static void main(String[] args) {
+        //ExcelWork test = new ExcelWork("Data.xlsx");
+        
         
         //Установка стандартных инженерных систем
         ArrayList<Sensor> sen_list = new ArrayList<>();
         Sensor gas_press = new Sensor("Газопровод", "Датчик давления", 20, 10,30);
         sen_list.add(gas_press);
-        Sensor gas_loss = new Sensor("Газопровод", "Датчик утечки газа", 20, 10,30);
+        Sensor gas_loss = new Sensor("Газопровод", "Датчик утечки газа", 0, 0,0);
         sen_list.add(gas_loss);
         
         Sensor boiler_temp = new Sensor("Котел", "Датчик температуры", 20, 10,30);
         sen_list.add(boiler_temp);
-        Sensor boiler_gas = new Sensor("Котел", "Датчик газа", 20, 10,30);
+        Sensor boiler_gas = new Sensor("Котел", "Датчик утечки газа", 0, 0,0);
         sen_list.add(boiler_gas);
         
         Sensor pump_press = new Sensor("Насосная станция", "Датчик давления", 20, 10,30);
@@ -49,8 +51,13 @@ public class Java_Exam {
         sen_list.add(heat_temp);
         Sensor heat_press = new Sensor("Отопление", "Датчик давления", 20, 10,30);
         sen_list.add(heat_press);
-        Sensor heat_hum = new Sensor("Отопление", "Датчик влажности", 20, 10,30);
+        Sensor heat_hum = new Sensor("Отопление", "Датчик утечки жидкости", 0, 0,0);
         sen_list.add(heat_hum);
+        
+        
+        Data_Gen S = new Data_Gen();
+        S.Gen(sen_list);
+        
         
         GUI gui = new GUI("Система Умный дом", sen_list);
         gui.setVisible(true);
