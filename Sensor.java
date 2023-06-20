@@ -1,4 +1,4 @@
-package mephi.Java_Exam;
+package mephi.java_exam;
 
 public final class Sensor {
     
@@ -52,3 +52,4 @@ public final class Sensor {
         return this.lim2;
     }
 }
+

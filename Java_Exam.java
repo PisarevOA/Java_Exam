@@ -1,12 +1,16 @@
-package mephi.Java_Exam;
+package mephi.java_exam;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class Java_Exam {
 
-    public static void main(String[] args) {
-        //ExcelWork test = new ExcelWork("Data.xlsx");
+    public static void main(String[] args) throws IOException {
         
+        ArrayList<Integer> bad_sen_list = new ArrayList<>();
+        ArrayList<String> bad_sys_list = new ArrayList<>();
+        ArrayList<ArrayList<Integer> > Data_matrix = 
+                  new ArrayList< >();
         
         //Установка стандартных инженерных систем
         ArrayList<Sensor> sen_list = new ArrayList<>();
@@ -54,12 +58,13 @@ public class Java_Exam {
         Sensor heat_hum = new Sensor("Отопление", "Датчик утечки жидкости", 0, 0,0);
         sen_list.add(heat_hum);
         
-        
+        ExcelWork file = new ExcelWork();
+                
         Data_Gen S = new Data_Gen();
-        S.Gen(sen_list);
+        S.Gen(sen_list, bad_sen_list, bad_sys_list,Data_matrix,file);
         
         
-        GUI gui = new GUI("Система Умный дом", sen_list);
+        GUI gui = new GUI("Система Умный дом", sen_list, bad_sen_list, bad_sys_list,Data_matrix,file);
         gui.setVisible(true);
     }
 }
