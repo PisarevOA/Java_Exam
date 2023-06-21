@@ -7,19 +7,20 @@ import java.util.Date;
 public class Data_Gen {
     
 
-    public void Data_Gen(ArrayList<Sensor> sen_list, int a, ArrayList<Integer> bad_sen_list, ArrayList<String> bad_sys_list){
+    public void Data_Gen(ArrayList<Sensor> sen_list, ArrayList<Integer> bad_sen_list, ArrayList<String> bad_sys_list){
     }
     
     
     public void Gen(ArrayList<Sensor> sen_list, ArrayList<Integer> bad_sen_list,
-                    ArrayList<String> bad_sys_list, ArrayList<ArrayList<Integer> > Data_matrix,
+                    ArrayList<String> bad_sys_list, ArrayList<Date> DT,
                     ExcelWork file) throws IOException{
         int d = 0;//переменный диапазон допустимых значений для датчика
         int s = 0;//переменная случайной генерации - определяет будет ли нештатный случай
         double l = 0; //переменная выброса - причина неисправности (больше/меньше штатного значения)
         
         ArrayList<Integer> var_line = new ArrayList<>();
-                
+        Date date = new Date();
+        DT.add(date);
 
         for(int i=0; i<sen_list.size(); i++){
             s = (int) (1 + Math.random()*100);
@@ -80,7 +81,7 @@ public class Data_Gen {
             var_line.add(sen_list.get(i).get_value()); //формирование массива показаний
         }
         
-        file.saveData(sen_list);
+        file.saveData(sen_list, DT);
         
         
         for(int k=0; k<bad_sen_list.size();k++){
@@ -119,7 +120,7 @@ public class Data_Gen {
                         }
                     }
                     
-                    System.out.println(sen_list.get(i).get_Sys_name());
+                    //System.out.println(sen_list.get(i).get_Sys_name());
                 }
             }
             else{//бинарные датчики
@@ -130,7 +131,7 @@ public class Data_Gen {
                 }
                 else{//наличие проблемы
                     if (!bad_sen_list.contains(i) && s >= 80){
-                        System.out.println(sen_list.get(i).get_Sys_name() + "FFFFFFFFFF");
+                        //System.out.println(sen_list.get(i).get_Sys_name() + "FFFFFFFFFF");
                         sen_list.get(i).set_value(1);
                         bad_sen_list.add(i);
                         bad_sys_list.add(sen_list.get(i).get_Sys_name());
