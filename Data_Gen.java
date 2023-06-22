@@ -26,44 +26,42 @@ public class Data_Gen {
             s = (int) (1 + Math.random()*100);
             //System.out.println(s);
             if (!bad_sys_list.contains(sen_list.get(i).get_Sys_name())){//проверка, входит ли система в список сломанных
+                
                 //расчеты для случая "не входит": штатная генерация и обычный шанс проблемы
                 if(sen_list.get(i).get_lim1()!=sen_list.get(i).get_lim2()){//небинарные датчики
                                 
-                if (s >= 6 && s < 95 && !bad_sen_list.contains(i)){ //штатные данные
-                    d = sen_list.get(i).get_lim2() - sen_list.get(i).get_lim1();
-                    sen_list.get(i).set_value((int) (sen_list.get(i).get_lim1() + Math.random() * (d)));
-                }
-                else{
-                    if(s > 95 && !bad_sen_list.contains(i)){//генерируется отклонение
-                        l = Math.random(); 
-                        if (l<0.5){
-                            sen_list.get(i).set_value((int)(2 + sen_list.get(i).get_lim1()- Math.random()*sen_list.get(i).get_lim1()));
-                        }
-                        else{
-                            sen_list.get(i).set_value((int)(2 + sen_list.get(i).get_lim2()+ Math.random()*sen_list.get(i).get_lim2()));
-                        }
-                        bad_sen_list.add(i);
-                        bad_sys_list.add(sen_list.get(i).get_Sys_name());
-                    }else{//s<6: датчик отключен
-                        if(!bad_sen_list.contains(i)){
-                            sen_list.get(i).set_value(-1);
+                    if (s >= 5 && s < 95 && !bad_sen_list.contains(i)){ //штатные данные
+                        d = sen_list.get(i).get_lim2() - sen_list.get(i).get_lim1();
+                        sen_list.get(i).set_value((int) (sen_list.get(i).get_lim1() + Math.random() * (d)));
+                    }
+                    else{
+                        if(s > 95 && !bad_sen_list.contains(i)){//генерируется отклонение
+                            l = Math.random(); 
+                            if (l<0.5){
+                                sen_list.get(i).set_value((int)(2 + sen_list.get(i).get_lim1()- Math.random()*sen_list.get(i).get_lim1()));
+                            }
+                            else{
+                                sen_list.get(i).set_value((int)(2 + sen_list.get(i).get_lim2()+ Math.random()*sen_list.get(i).get_lim2()));
+                            }
                             bad_sen_list.add(i);
                             bad_sys_list.add(sen_list.get(i).get_Sys_name());
+                        }else{//s<6: датчик отключен
+                            if(!bad_sen_list.contains(i)){
+                                sen_list.get(i).set_value(-1);
+                                bad_sen_list.add(i);
+                                //bad_sys_list.add(sen_list.get(i).get_Sys_name());
+                            }
                         }
-                    }
                     
-                    System.out.println(sen_list.get(i).get_Sys_name());
                 }
             }
             else{//бинарные датчики
                 
-                if ((s >= 6 && s < 95) && !bad_sen_list.contains(i)){ //штатные данные
-                    //System.out.println(sen_list.get(i).get_Sys_name() + "AAAAAAAA");
+                if ((s >= 5 && s < 95) && !bad_sen_list.contains(i)){ //штатные данные
                     sen_list.get(i).set_value(0);
                 }
                 else{//наличие проблемы
                     if (!bad_sen_list.contains(i) && s >= 95){
-                        System.out.println(sen_list.get(i).get_Sys_name() + "FFFFFFFFFF");
                         sen_list.get(i).set_value(1);
                         bad_sen_list.add(i);
                         bad_sys_list.add(sen_list.get(i).get_Sys_name());
@@ -83,26 +81,19 @@ public class Data_Gen {
         
         file.saveData(sen_list, DT);
         
-        
-        for(int k=0; k<bad_sen_list.size();k++){
-                System.out.print (bad_sen_list.get(k)+ " ");
-            }
-        System.out.println ("\n _____________________");
-        for(int k=0; k<var_line.size();k++){
-                System.out.print (var_line.get(k)+ " ");
-            }
     }
     
     public void Gen30(int i, ArrayList<Sensor> sen_list, ArrayList<Integer> bad_sen_list, ArrayList<String> bad_sys_list){
-        int s = (int) (1 + Math.random()*100);        
+        int s = (int) (1 + Math.random()*100); 
+        //System.out.println("А30: " + s);
         if(sen_list.get(i).get_lim1()!=sen_list.get(i).get_lim2()){//небинарные датчики
                                 
-            if (s >= 10 && s < 80 && !bad_sen_list.contains(i)){ //штатные данные
+            if (s >= 7 && s < 85 && !bad_sen_list.contains(i)){ //штатные данные
                 int d = sen_list.get(i).get_lim2() - sen_list.get(i).get_lim1();
                 sen_list.get(i).set_value((int) (sen_list.get(i).get_lim1() + Math.random() * (d)));
             }
                 else{
-                    if(s > 80 && !bad_sen_list.contains(i)){//генерируется отклонение
+                    if(s > 85 && !bad_sen_list.contains(i)){//генерируется отклонение
                         double l = Math.random(); 
                         if (l<0.5){
                             sen_list.get(i).set_value((int)(2 + sen_list.get(i).get_lim1()- Math.random()*sen_list.get(i).get_lim1()));
@@ -125,16 +116,14 @@ public class Data_Gen {
             }
             else{//бинарные датчики
                 
-                if ((s >= 10 && s < 80) && !bad_sen_list.contains(i)){ //штатные данные
-                    //System.out.println(sen_list.get(i).get_Sys_name() + "AAAAAAAA");
+                if ((s >= 7 && s < 85) && !bad_sen_list.contains(i)){ //штатные данные
                     sen_list.get(i).set_value(0);
                 }
                 else{//наличие проблемы
-                    if (!bad_sen_list.contains(i) && s >= 80){
-                        //System.out.println(sen_list.get(i).get_Sys_name() + "FFFFFFFFFF");
+                    if (!bad_sen_list.contains(i) && s >= 85){
                         sen_list.get(i).set_value(1);
                         bad_sen_list.add(i);
-                        bad_sys_list.add(sen_list.get(i).get_Sys_name());
+                        //bad_sys_list.add(sen_list.get(i).get_Sys_name());
                     }else{
                         if(bad_sen_list.contains(i)){
                             sen_list.get(i).set_value(1);

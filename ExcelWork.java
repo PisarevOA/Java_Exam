@@ -20,8 +20,6 @@ public class ExcelWork {
         
     XSSFCellStyle ErrStyle = workbook1.createCellStyle();
     XSSFCellStyle DateStyle = workbook1.createCellStyle();
-    //XSSFColor xc = new (XSSFColor) color;
-    //XSSFColor backgroundColour = new XSSFColor((IndexedColorMap) RED);
         
     XSSFFont font = workbook1.createFont();
         
@@ -46,6 +44,7 @@ public class ExcelWork {
         Row varRow = sheet1.createRow(k);
         varRow.createCell(0).setCellValue(DT.get(k-2));
         varRow.getCell(0).setCellStyle(DateStyle);
+        sheet1.autoSizeColumn(0);
         k++;
         
         
@@ -66,4 +65,5 @@ public class ExcelWork {
 
         workbook1.write(new FileOutputStream("Data.xlsx"));
     }
+    
 }
